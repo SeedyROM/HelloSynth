@@ -18,4 +18,4 @@ Well I wanted to make a simple synthesizer, I started on my computer but realize
 
 ## Setup
 
-**Follow the instruction from here [here](https://lazyfoo.net/tutorials/SDL/52_hello_mobile/ios_mac/index.php) to link SDL into the Xcode project!**
+**Follow the instruction from [here](https://lazyfoo.net/tutorials/SDL/52_hello_mobile/ios_mac/index.php) to link SDL into the Xcode project!**
