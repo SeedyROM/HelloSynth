@@ -1,4 +1,4 @@
-# HelloSynth
+# 🎶 HelloSynth 🎶
 
 ## What is this?
 
