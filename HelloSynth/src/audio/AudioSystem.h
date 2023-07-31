@@ -5,8 +5,10 @@
 class AudioSystem
 {
 public:
+    ~AudioSystem();
+
     int init();
-    void start();
+    int start();
     void stop();
     void setCallback(void (*callback)(void *, uint8_t *, int));
 

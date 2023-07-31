@@ -23,14 +23,11 @@ public:
         return instance;
     }
 
-    static void output(Level level, const char *format, ...)
+    static void output(Level level, const char *format, va_list args)
     {
         auto instance = log::get();
         if (level >= instance.m_level)
         {
-            va_list args = {0};
-            va_start(args, format);
-            // Print the time
             const auto now = time(nullptr);
             const auto time = localtime(&now);
             fprintf(stdout, "[%d-%02d-%02d %02d:%02d:%02d] - ", time->tm_year + 1900, time->tm_mon + 1, time->tm_mday, time->tm_hour, time->tm_min, time->tm_sec);
@@ -43,27 +40,42 @@ public:
 
     static inline void debug(const char *format, ...)
     {
-        log::output(Level::Debug, format);
+        va_list args;
+        va_start(args, format);
+        log::output(Level::Debug, format, args);
+        va_end(args);
     }
 
     static inline void info(const char *format, ...)
     {
-        log::output(Level::Info, format);
+        va_list args;
+        va_start(args, format);
+        log::output(Level::Info, format, args);
+        va_end(args);
     }
 
     static inline void warning(const char *format, ...)
     {
-        log::output(Level::Warning, format);
+        va_list args;
+        va_start(args, format);
+        log::output(Level::Warning, format, args);
+        va_end(args);
     }
 
     static inline void error(const char *format, ...)
     {
-        log::output(Level::Error, format);
+        va_list args;
+        va_start(args, format);
+        log::output(Level::Error, format, args);
+        va_end(args);
     }
 
     static inline void fatal(const char *format, ...)
     {
-        log::output(Level::Fatal, format);
+        va_list args;
+        va_start(args, format);
+        log::output(Level::Fatal, format, args);
+        va_end(args);
     }
 
     static inline void setLevel(Level level)
