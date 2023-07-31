@@ -18,6 +18,8 @@ public:
 
     void run();
 
+    float volume = 0.0f;
+
 private:
     Renderer *m_renderer;
     AudioSystem *m_audioSystem;

@@ -33,13 +33,15 @@ int WoozyWobbler::initAudio()
 
     m_audioSystem->setCallback([](void *userData, uint8_t *stream, int len)
                                {
-
+        WoozyWobbler *self = (WoozyWobbler *)userData;
         float *buffer = (float *)stream;
         for(size_t i = 0; i < len / sizeof(float); i++)
         {
             float x = ((float) rand() / (RAND_MAX)) * 2 - 1;
-            buffer[i] = x * 0.2f;
+            buffer[i] = x * self->volume;
         } });
+
+    m_audioSystem->setUserData(this);
 
     if (m_audioSystem->init() != 0)
     {
@@ -76,6 +78,12 @@ void WoozyWobbler::run()
                 m_running = false;
             }
         }
+
+        // Get the last touch position
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        volume = (float)x / (float)m_renderer->getWidth();
+
         SDL_SetRenderDrawColor(m_renderer->getRenderer(), 0, 255, 0, 255);
         SDL_RenderClear(m_renderer->getRenderer());
         SDL_RenderPresent(m_renderer->getRenderer());
