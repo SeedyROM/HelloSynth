@@ -15,3 +15,7 @@ Well I wanted to make a simple synthesizer, I started on my computer but realize
   - [ ] Create a simple transport to trigger each square when it's hit by the playback head
   - [ ] Play some sounds???
 - [ ] _TBD_
+
+## Setup
+
+**Follow the instruction from here [here](https://lazyfoo.net/tutorials/SDL/52_hello_mobile/ios_mac/index.php) to link SDL into the Xcode project!**
