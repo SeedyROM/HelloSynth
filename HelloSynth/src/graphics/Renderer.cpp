@@ -4,7 +4,7 @@
 
 int Renderer::init()
 {
-    log::info("Initializing Renderer...\n");
+    log::info("Initializing Renderer...");
 
     SDL_DisplayMode displayMode;
     if (SDL_GetCurrentDisplayMode(0, &displayMode) == 0)
@@ -16,14 +16,14 @@ int Renderer::init()
     m_window = SDL_CreateWindow("Hello, world!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_width, m_height, SDL_WINDOW_SHOWN);
     if (!m_window)
     {
-        log::error("Failed to create window: %s\n", SDL_GetError());
+        log::error("Failed to create window: %s", SDL_GetError());
         return 1;
     }
 
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     if (!m_renderer)
     {
-        log::error("Failed to create renderer: %s\n", SDL_GetError());
+        log::error("Failed to create renderer: %s", SDL_GetError());
         return 1;
     }
 

@@ -4,11 +4,11 @@
 
 int AudioSystem::init()
 {
-    log::info("Initializing AudioSystem...\n");
+    log::info("Initializing AudioSystem...");
 
     if (m_deviceId != 0)
     {
-        log::error("AudioSystem already initialized!\n");
+        log::error("AudioSystem already initialized!");
         return 1;
     }
 
@@ -25,15 +25,11 @@ int AudioSystem::init()
     m_deviceId = SDL_OpenAudioDevice(nullptr, 0, m_wantSpec, m_haveSpec, 0);
     if (m_deviceId == 0)
     {
-        log::error("Failed to open audio device: %s\n", SDL_GetError());
+        log::error("Failed to open audio device: %s", SDL_GetError());
         return 1;
     }
 
-    // Log the have spec
-    log::info("AudioSystem initialized:");
-    log::info("Sample Rate: %d", m_haveSpec->freq);
-    log::info("Buffer Size: %d", m_haveSpec->samples);
-    log::info("Channels: %d", m_haveSpec->channels);
+    log::info("AudioSystem initialized with spec (Sample Rate: %d, Buffer Size: %d, Channels: %d)", m_haveSpec->freq, m_haveSpec->samples, m_haveSpec->channels);
 
     delete m_wantSpec;
 
@@ -43,15 +39,18 @@ int AudioSystem::init()
 int AudioSystem::start()
 {
     if (m_deviceId == 0)
-        return 1;
-
-    if (m_callback == nullptr)
     {
-        log::error("AudioSystem callback is null!\n");
+        log::error("AudioSystem not initialized!");
         return 1;
     }
 
-    log::info("Starting AudioSystem...\n");
+    if (m_callback == nullptr)
+    {
+        log::error("AudioSystem callback is null!");
+        return 1;
+    }
+
+    log::info("Starting AudioSystem playback...");
     SDL_PauseAudioDevice(m_deviceId, 0);
 
     return 0;
@@ -62,7 +61,7 @@ void AudioSystem::stop()
     if (m_deviceId == 0)
         return;
 
-    log::info("Stopping AudioSystem...\n");
+    log::info("Stopping AudioSystem playback...");
     SDL_PauseAudioDevice(m_deviceId, 1);
 }
 

@@ -6,7 +6,7 @@ WoozyWobbler::WoozyWobbler(){};
 
 int WoozyWobbler::init()
 {
-    log::info("Initializing WoozyWobbler...\n");
+    log::info("Initializing WoozyWobbler...");
 
     if (initSdl() != 0 || initAudio() != 0 || initVideo() != 0)
     {
@@ -20,7 +20,7 @@ int WoozyWobbler::initSdl()
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
     {
-        log::error("Failed to initialize SDL: %s\n", SDL_GetError());
+        log::error("Failed to initialize SDL: %s", SDL_GetError());
         return 1;
     }
 
@@ -73,7 +73,7 @@ void WoozyWobbler::run()
         return;
     }
 
-    log::info("Running WoozyWobbler...\n");
+    log::info("Running WoozyWobbler...");
     m_running = true;
     while (m_running)
     {
