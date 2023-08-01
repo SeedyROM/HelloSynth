@@ -13,7 +13,15 @@ int Renderer::init()
         m_height = displayMode.h;
     }
 
-    m_window = SDL_CreateWindow("Hello, world!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_width, m_height, SDL_WINDOW_SHOWN);
+    // Setup the orintation hints
+    SDL_SetHint("SDL_HINT_ORIENTATIONS", "LandscapeLeft LandscapeRight");
+
+    m_window = SDL_CreateWindow("Hello, world!",
+                                SDL_WINDOWPOS_UNDEFINED,
+                                SDL_WINDOWPOS_UNDEFINED,
+                                m_width,
+                                m_height,
+                                SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS | SDL_WINDOW_FULLSCREEN);
     if (!m_window)
     {
         log::error("Failed to create window: %s", SDL_GetError());

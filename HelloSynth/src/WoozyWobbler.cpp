@@ -84,6 +84,14 @@ void WoozyWobbler::run()
             {
                 m_running = false;
             }
+            
+            if (event.type == SDL_APP_WILLENTERBACKGROUND) {
+                m_audioSystem->stop();
+            }
+            
+            if (event.type == SDL_APP_WILLENTERFOREGROUND) {
+                m_audioSystem->start();
+            }
         }
 
         // Get the last touch position
@@ -91,7 +99,7 @@ void WoozyWobbler::run()
         SDL_GetMouseState(&x, &y);
         volume = (float)x / (float)m_renderer->getWidth();
 
-        SDL_SetRenderDrawColor(m_renderer->getRenderer(), 0, 255, 0, 255);
+        SDL_SetRenderDrawColor(m_renderer->getRenderer(), 0, 255, y, 255);
         SDL_RenderClear(m_renderer->getRenderer());
         SDL_RenderPresent(m_renderer->getRenderer());
     }
