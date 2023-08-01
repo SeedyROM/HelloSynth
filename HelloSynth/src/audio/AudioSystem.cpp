@@ -79,3 +79,8 @@ AudioSystem::~AudioSystem()
 
     delete m_haveSpec;
 }
+
+SDL_AudioSpec *AudioSystem::getConfig() const
+{
+    return m_haveSpec;
+}

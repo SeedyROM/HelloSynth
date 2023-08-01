@@ -16,7 +16,7 @@ int Renderer::init()
     // Setup the orintation hints
     SDL_SetHint("SDL_HINT_ORIENTATIONS", "LandscapeLeft LandscapeRight");
 
-    m_window = SDL_CreateWindow("Hello, world!",
+    m_window = SDL_CreateWindow("HelloSynth",
                                 SDL_WINDOWPOS_UNDEFINED,
                                 SDL_WINDOWPOS_UNDEFINED,
                                 m_width,

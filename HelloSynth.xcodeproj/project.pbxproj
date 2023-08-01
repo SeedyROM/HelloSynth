@@ -15,6 +15,7 @@
 		14A1C48D2A77981C004C799F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 14A1C48C2A77981C004C799F /* main.c */; };
 		14A1C4992A77A928004C799F /* AudioSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14A1C4972A77A928004C799F /* AudioSystem.cpp */; };
 		14A1C49D2A77AAB1004C799F /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14A1C49C2A77AAB0004C799F /* Renderer.cpp */; };
+		14AFD0322A78C04000FBE7FF /* Transport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFD0312A78C04000FBE7FF /* Transport.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		14A1C4982A77A928004C799F /* AudioSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSystem.h; sourceTree = "<group>"; };
 		14A1C49B2A77AAB0004C799F /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		14A1C49C2A77AAB0004C799F /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		14AFD0252A78C04000FBE7FF /* Transport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transport.h; sourceTree = "<group>"; };
+		14AFD0312A78C04000FBE7FF /* Transport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transport.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +218,8 @@
 		14A1C4962A77A928004C799F /* audio */ = {
 			isa = PBXGroup;
 			children = (
+				14AFD0312A78C04000FBE7FF /* Transport.cpp */,
+				14AFD0252A78C04000FBE7FF /* Transport.h */,
 				14A1C4972A77A928004C799F /* AudioSystem.cpp */,
 				14A1C4982A77A928004C799F /* AudioSystem.h */,
 			);
@@ -387,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14A1C49D2A77AAB1004C799F /* Renderer.cpp in Sources */,
+				14AFD0322A78C04000FBE7FF /* Transport.cpp in Sources */,
 				14A1C48D2A77981C004C799F /* main.c in Sources */,
 				143D08822A7795F100CF834E /* WoozyWobbler.cpp in Sources */,
 				14A1C4992A77A928004C799F /* AudioSystem.cpp in Sources */,

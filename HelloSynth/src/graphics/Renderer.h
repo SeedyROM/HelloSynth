@@ -9,7 +9,7 @@ public:
 
     int init();
 
-    SDL_Renderer *getRenderer() const
+    SDL_Renderer *getInner() const
     {
         return m_renderer;
     }

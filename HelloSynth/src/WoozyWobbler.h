@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 
 #include "audio/AudioSystem.h"
+#include "audio/Transport.h"
 #include "graphics/Renderer.h"
 
 class WoozyWobbler
@@ -21,6 +22,7 @@ public:
     float volume = 0.0f;
 
 private:
+    Transport *m_transport;
     Renderer *m_renderer;
     AudioSystem *m_audioSystem;
 

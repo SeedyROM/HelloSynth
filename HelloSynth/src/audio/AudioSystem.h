@@ -18,6 +18,8 @@ public:
         m_userData = (void *)userData;
     }
 
+    SDL_AudioSpec *getConfig() const;
+
 private:
     SDL_AudioDeviceID m_deviceId = 0;
     SDL_AudioSpec *m_wantSpec = nullptr;

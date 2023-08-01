@@ -2,6 +2,8 @@
 
 #include "utils/Logger.h"
 
+#include <SDL2/SDL.h>
+
 WoozyWobbler::WoozyWobbler(){};
 
 int WoozyWobbler::init()
@@ -36,12 +38,22 @@ int WoozyWobbler::initAudio()
         [](void *userData, uint8_t *stream, int len) 
         {
             auto self = (WoozyWobbler *)userData;
-            float *buffer = (float *)stream;
-            for(size_t i = 0; i < len / sizeof(float); i++)
+            auto config = self->m_audioSystem->getConfig();
+            auto transport = self->m_transport;
+
+            auto numChannels = config->channels;
+            auto numSamples = len / sizeof(float);
+            
+            auto buffer = (float *)stream;
+            for (size_t i = 0; i < numSamples; i += numChannels)
             {
                 float x = ((float) rand() / (RAND_MAX)) * 2 - 1;
-                buffer[i] = x * self->volume;
-            } 
+                for (size_t j = 0; j < numChannels; j++)
+                {
+                    buffer[i + j] = x * self->volume;
+                }  
+                transport->tick((float)numChannels / 48000.0f);
+            }
         }
     );
     // clang-format on
@@ -73,6 +85,9 @@ void WoozyWobbler::run()
         return;
     }
 
+    m_transport->setLoopLength(5.0f);
+    m_transport->play();
+
     log::info("Running WoozyWobbler...");
     m_running = true;
     while (m_running)
@@ -84,12 +99,14 @@ void WoozyWobbler::run()
             {
                 m_running = false;
             }
-            
-            if (event.type == SDL_APP_WILLENTERBACKGROUND) {
+
+            if (event.type == SDL_APP_WILLENTERBACKGROUND)
+            {
                 m_audioSystem->stop();
             }
-            
-            if (event.type == SDL_APP_WILLENTERFOREGROUND) {
+
+            if (event.type == SDL_APP_WILLENTERFOREGROUND)
+            {
                 m_audioSystem->start();
             }
         }
@@ -99,9 +116,22 @@ void WoozyWobbler::run()
         SDL_GetMouseState(&x, &y);
         volume = (float)x / (float)m_renderer->getWidth();
 
-        SDL_SetRenderDrawColor(m_renderer->getRenderer(), 0, 255, y, 255);
-        SDL_RenderClear(m_renderer->getRenderer());
-        SDL_RenderPresent(m_renderer->getRenderer());
+        auto playbackPosition = m_transport->getPlaybackPosition() / m_transport->getLoopLength() * m_renderer->getWidth();
+
+        SDL_SetRenderDrawColor(m_renderer->getInner(), 0, 255, y, 255);
+        SDL_RenderClear(m_renderer->getInner());
+
+        // Draw a 10px wide line to represent the playback position
+        SDL_SetRenderDrawColor(m_renderer->getInner(), 255, 255, 255, 255);
+        SDL_Rect rect = {
+            (int)playbackPosition - 5,
+            0,
+            10,
+            m_renderer->getHeight(),
+        };
+        SDL_RenderFillRect(m_renderer->getInner(), &rect);
+
+        SDL_RenderPresent(m_renderer->getInner());
     }
 
     m_audioSystem->stop();
@@ -109,6 +139,7 @@ void WoozyWobbler::run()
 
 WoozyWobbler::~WoozyWobbler()
 {
+    delete m_transport;
     delete m_audioSystem;
     delete m_renderer;
 }
